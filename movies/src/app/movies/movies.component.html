@@ -1,0 +1,107 @@
+<form>
+    <mat-form-field>
+        <input type="text"
+            [(ngModel)] = "text"
+            placeholder="Search"
+            aria-label="Movies"
+            matInput
+            (keyup)="search(text)"
+            [formControl]="searchForm"/>
+    </mat-form-field>
+</form>
+
+
+<mat-tab-group>
+
+    <mat-tab label="Movies">
+        <div class="content">
+            <div>
+                
+                <h2>Top 10 movies</h2>  
+        
+                    <table fxFlex="100%" *ngFor="let movie of movies; let i =index">
+                        <tr>
+                            <td class="mat-column-id">
+                                {{movie.id}} 
+                            </td>
+                            <td class="mat-column-title">
+                                {{movie.title}}
+                            </td>
+                            <td class="mat-column-description">
+                                {{movie.description}}
+                            </td>
+                            <td class="mat-column-date">
+                                {{movie.releaseDate | date: 'dd.MM.yyyy' }}
+                            </td>
+                            <td class="mat-column-cast" >
+                                <label>Cast:</label>
+                                <div *ngIf="movie.cast">
+                                    <table fxFlex="100%" *ngFor="let cast of movie.cast; let i =index">
+                                        <td *ngIf="cast.castMember">{{cast.castMember.name}}</td>
+                                    </table>
+                                </div>
+                            </td>
+                            <td class="mat-column-image">
+                            <img [src]="movie.url" alt={{movie.title}} />
+                            </td>
+                            <td>
+                                <div *ngIf="movie.movieRate">
+                                    <table>
+                                        <button mat-icon-button *ngFor="let star of movie.movieRate.stars; let j =index">
+                                            <mat-icon>star</mat-icon>
+                                        </button>
+                                    </table>    
+                                </div>
+                                
+                            </td>
+                        </tr>
+                    </table> 
+            </div>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="TV shows"><div class="content">
+        <div>
+            
+            <h2>Top 10 movies</h2>  
+    
+                <table fxFlex="100%" *ngFor="let show of shows; let i =index">
+                    <tr>
+                        <td class="mat-column-id">
+                            {{show.id}} 
+                        </td>
+                        <td class="mat-column-title">
+                            {{show.title}}
+                        </td>
+                        <td class="mat-column-description">
+                            {{show.description}}
+                        </td>
+                        <td class="mat-column-date">
+                            {{show.releaseDate | date: 'dd.MM.yyyy' }}
+                        </td>
+                        <td class="mat-column-cast" >
+                            <label>Cast:</label>
+                            <div *ngIf="show.cast">
+                                <table fxFlex="100%" *ngFor="let cast of show.cast; let i =index">
+                                    <td *ngIf="cast.castMember">{{cast.castMember.name}}</td>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="mat-column-image">
+                        <img [src]="show.url" alt={{show.title}} />
+                        </td>
+                        <td>
+                            <div *ngIf="show.movieRate">
+                                <table>
+                                    <button mat-icon-button *ngFor="let star of show.movieRate.stars; let j =index">
+                                        <mat-icon>star</mat-icon>
+                                    </button>
+                                </table>    
+                            </div>
+                            
+                        </td>
+                    </tr>
+                </table> 
+        </div>
+    </div></mat-tab>
+</mat-tab-group>
